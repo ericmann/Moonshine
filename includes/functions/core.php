@@ -48,10 +48,31 @@ function deactivate() {
  * @return array
  */
 function get_wordpressers() {
-	return array(
-		'Eric Mann' => 'ericmann',
-		'Andrew Nacin' => 'nacin',
-	);
+	$wordpressers = get_transient( 'moonlight' );
+
+	if ( false === $wordpressers ) {
+		$request = wp_remote_get( '' );
+
+		if ( is_wp_error( $request ) ) {
+			return array();
+		}
+
+		$body = wp_remote_retrieve_body( $request );
+
+		if ( is_wp_error( $body ) ) {
+			return array();
+		}
+
+		$wordpressers = json_decode( $body, true );
+
+		if ( null == $wordpressers ) {
+			return array();
+		}
+
+		set_transient( 'moonshine', $wordpressers, 60 * 60 ); // Cache for an hour.
+	}
+
+	return $wordpressers;
 }
 
 /**
