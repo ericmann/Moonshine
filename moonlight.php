@@ -40,39 +40,12 @@ define( 'MOONLIGHT_VERSION', '0.1.0' );
 define( 'MOONLIGHT_URL',     plugin_dir_url( __FILE__ ) );
 define( 'MOONLIGHT_PATH',    dirname( __FILE__ ) . '/' );
 
-/**
- * Default initialization for the plugin:
- * - Registers the default textdomain.
- */
-function moonlight_init() {
-	$locale = apply_filters( 'plugin_locale', get_locale(), 'moonlight' );
-	load_textdomain( 'moonlight', WP_LANG_DIR . '/moonlight/moonlight-' . $locale . '.mo' );
-	load_plugin_textdomain( 'moonlight', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
+// Include necessary files
+include __DIR__ . '/includes/functions/core.php';
 
-/**
- * Activate the plugin
- */
-function moonlight_activate() {
-	// First load the init scripts in case any rewrite functionality is being loaded
-	moonlight_init();
+// Bootstrap
+Moonlight\Core\setup();
 
-	flush_rewrite_rules();
-}
-register_activation_hook( __FILE__, 'moonlight_activate' );
-
-/**
- * Deactivate the plugin
- * Uninstall routines should be in uninstall.php
- */
-function moonlight_deactivate() {
-
-}
-register_deactivation_hook( __FILE__, 'moonlight_deactivate' );
-
-// Wireup actions
-add_action( 'init', 'moonlight_init' );
-
-// Wireup filters
-
-// Wireup shortcodes
+// WordPress activation
+register_activation_hook(   __FILE__, 'Moonlight\Core\activate'   );
+register_deactivation_hook( __FILE__, 'Moonlight\Core\deactivate' );
