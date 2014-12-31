@@ -1,9 +1,9 @@
 === Moonlight ===
-Contributors:      10up
+Contributors:      ericmann
 Donate link:       https://eamann.com
-Tags: 
-Requires at least: 3.9
-Tested up to:      3.9
+Tags:              Twitter
+Requires at least: 4.1
+Tested up to:      4.1
 Stable tag:        0.1.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html

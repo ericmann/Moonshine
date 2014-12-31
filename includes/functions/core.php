@@ -51,7 +51,7 @@ function get_wordpressers() {
 	$wordpressers = get_transient( 'moonlight' );
 
 	if ( false === $wordpressers ) {
-		$request = wp_remote_get( 'https://raw.githubusercontent.com/ericmann/Moonshine/master/handles.json' );
+		$request = wp_remote_get( 'https://raw.githubusercontent.com/ericmann/Moonlight/master/handles.json' );
 
 		if ( is_wp_error( $request ) ) {
 			return array();
